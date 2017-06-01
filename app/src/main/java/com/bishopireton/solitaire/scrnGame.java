@@ -88,6 +88,11 @@ public class scrnGame extends AppCompatActivity {
   //todo before test code walk through it all
   //todo win lose make sure on clicks
   //todo watch out for null
+  //todo change icon
+
+  //image plan
+  //have a method that takes in a card and imge button and changes the image
+
   //so these arraylists- should I make it a deck-- need one for each imgCard --change them when move play to a pile or when move decks
   //when initialize--in reset I guess //should also probably be fields
 //    Card dDiamond= createCard(imgDeckDiamond);
@@ -735,4 +740,16 @@ public class scrnGame extends AppCompatActivity {
 
   }
 
+  //method that takes in an imagebutton and a card and sets the iamge of the image button bassed on that
+  public void changeImageResource(ImageButton b, Card c){
+    if(c.getSuit().equals("Diamonds")){
+      //todo be careful might be able to condense some of this
+      //todo use a switch statement
+      if(c.getRank()==1)
+          //b.setImageDrawable(getResources().getDrawable(R.drawable.diamondsace));
+          b.setImageResource(R.drawable.diamondsace);
+      else if(c.getRank()==2)
+        b.setImageResource(R.drawable.diamonds2);
+    }
+  }
 }
