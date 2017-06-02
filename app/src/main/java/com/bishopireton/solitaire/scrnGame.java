@@ -88,10 +88,11 @@ public class scrnGame extends AppCompatActivity {
   //todo before test code walk through it all
   //todo win lose make sure on clicks
   //todo watch out for null
-  //todo change icon
+  //todo change icon\
+  //todo images ---call the method everywhere
 
-  //image plan
-  //have a method that takes in a card and imge button and changes the image
+
+
 
   //so these arraylists- should I make it a deck-- need one for each imgCard --change them when move play to a pile or when move decks
   //when initialize--in reset I guess //should also probably be fields
@@ -157,7 +158,7 @@ public class scrnGame extends AppCompatActivity {
     });
 
     //set the onclickListeners for each deck
-    //todo method to set these
+
     //send in each suit image
     pileOnClickListener(imgCard1);
     pileOnClickListener(imgCard2);
@@ -179,7 +180,7 @@ public class scrnGame extends AppCompatActivity {
     b.setOnClickListener(new View.OnClickListener() {
       public void onClick(View v) {
         imgDeckOnClickListener((ImageButton)findViewById(v.getId()));//caste as button etc//v.getId and save it somewhere as the button
-        deckMoveOnClickListener((ImageButton)findViewById(v.getId()));//TODO start here
+        deckMoveOnClickListener((ImageButton)findViewById(v.getId()));
       }
     });
   }
@@ -324,36 +325,43 @@ public class scrnGame extends AppCompatActivity {
     if(pick.isBellow(corrWithImg)&& isPlayClick){
       //if statement to see what card to change
       //change b to p's image //idk if need if statement or not
-      //todo change images make sure this is an onClick
+
       //maybe modularize
       //can i use a diff method here?
       if(b.equals(imgCard1)) {
         p1.add(pick);//todo figure out where this adds this
         c1 = pick;
+        setCardImage(imgCard1,c1);
       }
       else if(b.equals(imgCard2)) {
         p2.add(pick);
         c2 = pick;
+        setCardImage(imgCard2,c2);
       }
       else if(b.equals(imgCard3)) {
         p3.add(pick);
         c3 = pick;
+        setCardImage(imgCard3,c3);
       }
       else if(b.equals(imgCard4)) {
         p4.add(pick);
         c4 = pick;
+        setCardImage(imgCard4,c4);
       }
       else if(b.equals(imgCard5)) {
         p5.add(pick);
         c5 = pick;
+        setCardImage(imgCard5,c5);
       }
       else if(b.equals(imgCard6)) {
         p5.add(pick);
         c6 = pick;
+        setCardImage(imgCard6,c6);
       }
       else {
         p6.add(pick);
         c7 = pick;
+        setCardImage(imgCard7,c7);
       }
 
       pick= createCard(imgCardPlay);
@@ -465,20 +473,10 @@ public class scrnGame extends AppCompatActivity {
   public Card createCard(ImageButton img){
     Card c= d.pickACard();
     c= d.removeCard(c);
-    setCardImage(c, img);
+    setCardImage(img,c);
     return c;
   }
-  //set the image of a imageButton to the card that corresponds to the value of that card
-  public void setCardImage(Card c, ImageButton img){
-    //set the image of that button according to the rank and suit of the card
-    //what else? put this value on card?????????????????????????????????????????????????????????????????????????????????????????????????
-    //TODO think about it I even need an image field on the card class // can't I just set the image buttons based on the rank and suit //maybe just use this method//honestly I like that idea better makes more sense
-    String s= c.getSuit();
-    int r= c.getRank();
-    //THEN MAKE A REALLY BIG SWITCH STATEMENT
-    //btn.setBackgroundResource(R.drawable.icon);
 
-  }
 
   //send in an image button and returns a card
   public Card btnToCard(ImageButton b){
@@ -574,18 +572,22 @@ public class scrnGame extends AppCompatActivity {
       if(b.equals(imgDeckClub)) {
         pClub.add(pick);
         cClub=pick;
+        setCardImage(imgDeckClub,pick);
       }
       else if(b.equals(imgDeckDiamond)){
         pDiamond.add(pick);
         cDiamond=pick;
+        setCardImage(imgDeckDiamond,pick);
       }
       else if(b.equals(imgDeckHeart)){
         pHeart.add(pick);
         cHeart=pick;
+        setCardImage(imgDeckHeart,pick);
       }
       else if(b.equals(imgDeckSpade)) {
         pSpade.add(pick);
         cSpade=pick;
+        setCardImage(imgDeckSpade,pick);
       }
       pick= createCard(imgCardPlay);
     }
@@ -594,25 +596,29 @@ public class scrnGame extends AppCompatActivity {
       if(b.equals(imgDeckClub)){
         pClub.add(pick);
         cClub=pick;
+        setCardImage(imgDeckClub,pick);
       }
       else if(b.equals(imgDeckDiamond)){
         pDiamond.add(pick);
         cDiamond=pick;
+        setCardImage(imgDeckDiamond,pick);
       }
       else if(b.equals(imgDeckHeart)){
         pHeart.add(pick);
         cHeart= pick;
+        setCardImage(imgDeckHeart,pick);
       }
       else if(b.equals(imgDeckSpade)){
         pSpade.add(pick);
         cSpade=pick;
+        setCardImage(imgDeckHeart,pick);
       }
       pick=createCard(imgCardPlay);
 
     }
     //for moving a deck
     //if is deck click is false when click on a deck then store in a card field its card card
-    //todo gonna have to do onclick or at least part
+
     //tod keep track of isDeckClick
     if(!isDeckClick){
       isDeckClick = true;
@@ -625,22 +631,26 @@ public class scrnGame extends AppCompatActivity {
       if(b.equals(imgDeckClub)) {
         pClub.add(deckClick);
         cClub=deckClick;
+        setCardImage(imgDeckClub, deckClick);
       }
       else if(b.equals(imgDeckDiamond)){
         pDiamond.add(deckClick);
         cDiamond=deckClick;
+        setCardImage(imgDeckDiamond,deckClick);
       }
       else if(b.equals(imgDeckHeart)){
         pHeart.add(deckClick);
         cHeart=deckClick;
+        setCardImage(imgDeckHeart,deckClick);
       }
       else if(b.equals(imgDeckSpade)) {
         pSpade.add(deckClick);
         cSpade=deckClick;
+        setCardImage(imgDeckSpade,deckClick);
       }
       //todo so if pile has only one check if other red ridges---if has other stuff in the pile remove white ridge
       //change the image of the pile
-      //todo change images
+      //todo change images START AROUND HERE WORKING ON IMAGES after this do ridges
       if(intClick==1)
         c1=createCard(imgCard1);//todo MAKE THIS BLANK and w others check if there are red cards
       else if(intClick==2) {
@@ -741,15 +751,134 @@ public class scrnGame extends AppCompatActivity {
   }
 
   //method that takes in an imagebutton and a card and sets the iamge of the image button bassed on that
-  public void changeImageResource(ImageButton b, Card c){
+  public void setCardImage(ImageButton b, Card c){
+    int rankCheck= c.getRank();
     if(c.getSuit().equals("Diamonds")){
       //todo be careful might be able to condense some of this
       //todo use a switch statement
-      if(c.getRank()==1)
-          //b.setImageDrawable(getResources().getDrawable(R.drawable.diamondsace));
-          b.setImageResource(R.drawable.diamondsace);
-      else if(c.getRank()==2)
-        b.setImageResource(R.drawable.diamonds2);
+      switch(rankCheck){
+        case 1: b.setImageResource(R.drawable.diamondsace);
+          break;
+        case 2: b.setImageResource(R.drawable.diamonds2);
+          break;
+        case 3: b.setImageResource(R.drawable.diamonds3);
+          break;
+        case 4: b.setImageResource(R.drawable.diamonds4);
+          break;
+        case 5: b.setImageResource(R.drawable.diamonds5);
+          break;
+        case 6: b.setImageResource(R.drawable.diamonds6);
+          break;
+        case 7: b.setImageResource(R.drawable.diamonds7);
+          break;
+        case 8: b.setImageResource(R.drawable.diamonds8);
+          break;
+        case 9: b.setImageResource(R.drawable.diamonds9);
+          break;
+        case 10: b.setImageResource(R.drawable.diamonds10);
+          break;
+        case 11: b.setImageResource(R.drawable.diamondsjack);
+          break;
+        case 12: b.setImageResource(R.drawable.diamondsqueen);
+          break;
+        case 13: b.setImageResource(R.drawable.diamondsking);
+          break;
+        default:b.setImageResource(R.drawable.fillercard);
+      }
+    }
+    else if(c.getSuit().equals("Clubs")){
+      switch (rankCheck){
+        case 1: b.setImageResource(R.drawable.clubsace);
+          break;
+        case 2: b.setImageResource(R.drawable.clubs2);
+          break;
+        case 3: b.setImageResource(R.drawable.clubs3);
+          break;
+        case 4: b.setImageResource(R.drawable.clubs4);
+          break;
+        case 5: b.setImageResource(R.drawable.clubs5);
+          break;
+        case 6: b.setImageResource(R.drawable.clubs6);
+          break;
+        case 7: b.setImageResource(R.drawable.clubs7);
+          break;
+        case 8: b.setImageResource(R.drawable.clubs8);
+          break;
+        case 9: b.setImageResource(R.drawable.clubs9);
+          break;
+        case 10: b.setImageResource(R.drawable.clubs10);
+          break;
+        case 11: b.setImageResource(R.drawable.clubsjack);
+          break;
+        case 12: b.setImageResource(R.drawable.clubsqueen);
+          break;
+        case 13: b.setImageResource(R.drawable.clubsking);
+          break;
+        default:b.setImageResource(R.drawable.fillercard);
+      }
+    }
+    else if(c.getSuit().equals("Spades")){
+      switch (rankCheck){
+        case 1: b.setImageResource(R.drawable.spadesace);
+          break;
+        case 2: b.setImageResource(R.drawable.spades2);
+          break;
+        case 3: b.setImageResource(R.drawable.spades3);
+          break;
+        case 4: b.setImageResource(R.drawable.spades4);
+          break;
+        case 5: b.setImageResource(R.drawable.spades5);
+          break;
+        case 6: b.setImageResource(R.drawable.spades6);
+          break;
+        case 7: b.setImageResource(R.drawable.spades7);
+          break;
+        case 8: b.setImageResource(R.drawable.spades8);
+          break;
+        case 9: b.setImageResource(R.drawable.spades9);
+          break;
+        case 10: b.setImageResource(R.drawable.spades10);
+          break;
+        case 11: b.setImageResource(R.drawable.spadesjack);
+          break;
+        case 12: b.setImageResource(R.drawable.spadesqueen);
+          break;
+        case 13: b.setImageResource(R.drawable.spadeskings);
+          break;
+          default:b.setImageResource(R.drawable.fillercard);
+
+      }
+    }
+    else if(c.getSuit().equals("Hearts")){
+      switch (rankCheck){
+        case 1: b.setImageResource(R.drawable.heartsace);
+          break;
+        case 2: b.setImageResource(R.drawable.hearts2);
+          break;
+        case 3: b.setImageResource(R.drawable.hearts3);
+          break;
+        case 4: b.setImageResource(R.drawable.hearts4);
+          break;
+        case 5: b.setImageResource(R.drawable.hearts5);
+          break;
+        case 6: b.setImageResource(R.drawable.hearts6);
+          break;
+        case 7: b.setImageResource(R.drawable.hearts7);
+          break;
+        case 8: b.setImageResource(R.drawable.hearts8);
+          break;
+        case 9: b.setImageResource(R.drawable.hearts9);
+          break;
+        case 10: b.setImageResource(R.drawable.hearts10);
+          break;
+        case 11: b.setImageResource(R.drawable.heartsjack);
+          break;
+        case 12: b.setImageResource(R.drawable.heartsqueen);
+          break;
+        case 13: b.setImageResource(R.drawable.heartsking);
+          break;
+        default:b.setImageResource(R.drawable.fillercard);
+      }
     }
   }
 }
