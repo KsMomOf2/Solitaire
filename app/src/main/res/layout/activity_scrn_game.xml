@@ -75,13 +75,26 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="110dp"
+            android:layout_height="150dp"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="50dp"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imgRRidge1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@android:drawable/editbox_background_normal" />
+
+                <ImageView
+                    android:id="@+id/imgWRidge1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@android:drawable/editbox_background_normal" />
 
                 <ImageButton
                     android:id="@+id/imgCard1"
@@ -95,6 +108,19 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
+                <ImageView
+                    android:id="@+id/imgRRidge2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@android:drawable/editbox_background_normal" />
+
+                <ImageView
+                    android:id="@+id/imgWRidge2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@android:drawable/editbox_background_normal" />
+
                 <ImageButton
                     android:id="@+id/imgCard2"
                     android:layout_width="50dp"
@@ -106,6 +132,18 @@
                 android:layout_width="50dp"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imgRRidge3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@android:drawable/editbox_background_normal" />
+
+                <ImageView
+                    android:id="@+id/imgWRidge3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@android:drawable/editbox_background_normal" />
 
                 <ImageButton
                     android:id="@+id/imgCard3"
@@ -119,6 +157,18 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
+                <ImageView
+                    android:id="@+id/imgRRidge4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@android:drawable/editbox_background_normal" />
+
+                <ImageView
+                    android:id="@+id/imgWRidge4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@android:drawable/editbox_background_normal" />
+
                 <ImageButton
                     android:id="@+id/imgCard4"
                     android:layout_width="50dp"
@@ -130,6 +180,18 @@
                 android:layout_width="50dp"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imgRRidge5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@android:drawable/editbox_background_normal" />
+
+                <ImageView
+                    android:id="@+id/imgWRidge5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@android:drawable/editbox_background_normal" />
 
                 <ImageButton
                     android:id="@+id/imgCard5"
@@ -143,6 +205,18 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
+                <ImageView
+                    android:id="@+id/imgRRidge6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@android:drawable/editbox_background_normal" />
+
+                <ImageView
+                    android:id="@+id/imgWRidge6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@android:drawable/editbox_background_normal" />
+
                 <ImageButton
                     android:id="@+id/imgCard6"
                     android:layout_width="50dp"
@@ -155,6 +229,18 @@
                 android:layout_width="50dp"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imgRRidge7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@android:drawable/editbox_background_normal" />
+
+                <ImageView
+                    android:id="@+id/imgWRidge7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@android:drawable/editbox_background_normal" />
 
                 <ImageButton
                     android:id="@+id/imgCard7"
@@ -174,7 +260,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"></LinearLayout>
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/btnRestart"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="CLICK TO RESTART/ ADMIT YOU ARE A LOSER" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 

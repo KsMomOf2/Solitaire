@@ -10,7 +10,9 @@ package com.bishopireton.solitaire;
         import android.support.v7.app.AppCompatActivity;
         import android.support.v7.widget.Toolbar;
         import android.view.View;
+        import android.widget.Button;
         import android.widget.ImageButton;
+        import android.widget.ImageView;
 
         import java.util.ArrayList;
 
@@ -28,6 +30,25 @@ public class scrnGame extends AppCompatActivity {
   private ImageButton imgDeckSpade;
   private ImageButton imgDeckClub;
   private ImageButton imgDeckHeart;
+
+  private ImageView rRidge1;
+  private ImageView rRidge2;
+  private ImageView rRidge3;
+  private ImageView rRidge4;
+  private ImageView rRidge5;
+  private ImageView rRidge6;
+  private ImageView rRidge7;
+
+  private ImageView wRidge1;
+  private ImageView wRidge2;
+  private ImageView wRidge3;
+  private ImageView wRidge4;
+  private ImageView wRidge5;
+  private ImageView wRidge6;
+  private ImageView wRidge7;
+
+  private Button btnRestart;
+
   private boolean isPlayClick;
   private boolean isDeckClick;
 
@@ -82,7 +103,7 @@ public class scrnGame extends AppCompatActivity {
   private int deckNum=0; //stores number of deck if isDeckClicked is false
 
   //todo quit button
-  //todo quit, when lose, when win, when deck runs  out of cards, when draw a card have to add that card to other deck
+  //todo quit, when lose, when win, when deck runs  out of cards,
   //todo if pile empty and there are red left flip those jaunts
   //todo refresh deck when none
   //todo before test code walk through it all
@@ -92,7 +113,7 @@ public class scrnGame extends AppCompatActivity {
   //todo images ---call the method everywhere
 
 
-
+//WHAT DOING RN RIDGES/IMAGES
 
   //so these arraylists- should I make it a deck-- need one for each imgCard --change them when move play to a pile or when move decks
   //when initialize--in reset I guess //should also probably be fields
@@ -139,6 +160,24 @@ public class scrnGame extends AppCompatActivity {
     imgDeckClub=(ImageButton)findViewById(R.id.imgDeckClub);
     imgDeckSpade=(ImageButton)findViewById(R.id.imgDeckSpade);
     imgDeckHeart=(ImageButton)findViewById(R.id.imgDeckHeart);
+
+    rRidge1=(ImageView)findViewById(R.id.imgRRidge1);
+    rRidge2= (ImageView)findViewById(R.id.imgRRidge2);
+    rRidge3=(ImageView)findViewById(R.id.imgRRidge3);
+    rRidge4=(ImageView)findViewById(R.id.imgRRidge4);
+    rRidge5=(ImageView)findViewById(R.id.imgRRidge5);
+    rRidge6=(ImageView)findViewById(R.id.imgRRidge6);
+    rRidge7=(ImageView)findViewById(R.id.imgRRidge7);
+
+    wRidge1=(ImageView)findViewById(R.id.imgWRidge1);
+    wRidge2=(ImageView)findViewById(R.id.imgWRidge2);
+    wRidge3=(ImageView)findViewById(R.id.imgWRidge3);
+    wRidge4=(ImageView)findViewById(R.id.imgWRidge4);
+    wRidge5=(ImageView)findViewById(R.id.imgWRidge5);
+    wRidge6=(ImageView)findViewById(R.id.imgWRidge6);
+    wRidge7=(ImageView)findViewById(R.id.imgWRidge7);
+
+    btnRestart=(Button)findViewById(R.id.btnRestart);
     //PUT STUFF ON THE LAYOUT
     reset();
     //pick random card - for put down on back(nah just do when turn over)
@@ -157,6 +196,12 @@ public class scrnGame extends AppCompatActivity {
       }
     });
 
+    btnRestart.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        reset();
+      }
+    });
     //set the onclickListeners for each deck
 
     //send in each suit image
@@ -231,31 +276,37 @@ public class scrnGame extends AppCompatActivity {
             //edit number of white ridges
             //TODO IMAGES
             //TODO i think pmove should work here but I would check
-            p1=combinePiles(p1,pMove);
+            p1=combinePiles(p1,pMove);//todo fix wRidge here?
           }
           else if(intMoveTo==2){
             p2= combinePiles(p2,pMove);
             wRidgeCount2= p2.size()-1;
+            setWRidgeImage(wRidgeCount2,wRidge2 );
           }
           else if(intMoveTo==3){
             p3= combinePiles(p3,pMove);
             wRidgeCount3= p3.size()-1;
+            setWRidgeImage(wRidgeCount3, wRidge3);
           }
           else if(intMoveTo==4){
             p4= combinePiles(p4,pMove);
             wRidgeCount4= p4.size()-1;
+            setWRidgeImage(wRidgeCount4, wRidge4);
           }
           else if(intMoveTo==5){
             p5= combinePiles(p5, pMove);
             wRidgeCount5= p5.size()-1;
+            setWRidgeImage(wRidgeCount5, wRidge5);
           }
           else if(intMoveTo==6){
             p6= combinePiles(p6, pMove);
             wRidgeCount6= p6.size()-1;
+            setWRidgeImage(wRidgeCount6, wRidge6);
           }
           else if(intMoveTo==7){
             p7=combinePiles(p7, pMove);
             wRidgeCount7= p7.size()-1;
+            setWRidgeImage(wRidgeCount7, wRidge7);
           }
           //todo what do when no red and no card
           //set first click pile to a drawn card
@@ -368,25 +419,38 @@ public class scrnGame extends AppCompatActivity {
       isPlayClick=false;
       //if b==imgcard1 add to wRidgeCount1
 
-      if(b.equals(imgCard1))
+      if(b.equals(imgCard1)){
         wRidgeCount1+=1;
-      else if(b.equals(imgCard2))
+        setWRidgeImage(wRidgeCount1, wRidge1);
+      }
+      else if(b.equals(imgCard2)){
         wRidgeCount2+=1;
-      else if(b.equals(imgCard3))
+        setWRidgeImage(wRidgeCount2, wRidge2);
+      }
+      else if(b.equals(imgCard3)){
         wRidgeCount3+=1;
-      else if(b.equals(imgCard4))
-        wRidgeCount4+=1;
-      else if(b.equals(imgCard5))
-        wRidgeCount5+=1;
-      else if(b.equals(imgCard6))
-        wRidgeCount6+=1;
-      else
-        wRidgeCount7+=1;
+        setWRidgeImage(wRidgeCount3,wRidge3);
+      }
+      else if(b.equals(imgCard4)) {
+        wRidgeCount4 += 1;
+        setWRidgeImage(wRidgeCount4, wRidge4);
+      }
+      else if(b.equals(imgCard5)) {
+        wRidgeCount5 += 1;
+        setWRidgeImage(wRidgeCount5, wRidge5);
+      }
+      else if(b.equals(imgCard6)) {
+        wRidgeCount6 += 1;
+        setWRidgeImage(wRidgeCount6, wRidge6);
+      }
+      else {
+        wRidgeCount7 += 1;
+        setWRidgeImage(wRidgeCount6,wRidge6);
+      }
 
-      //todo change image of ridge!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     }
-    //CHANGE THE IMAGE
+    //todo CHANGE THE IMAGE
 
 
 
@@ -657,7 +721,7 @@ public class scrnGame extends AppCompatActivity {
         if(p2.size()==1&&rRidgeCount2>=1){
           //take a card from red
           rRidgeCount2-=1;
-          //change image!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+          setRRidgeImage(rRidgeCount2, rRidge2);
           c2= createCard(imgCard2);
         }
         else if(p2.size()==1) {//check if its size would be 1 or 2
@@ -669,7 +733,7 @@ public class scrnGame extends AppCompatActivity {
           //remove one from white ridges
           p2.remove(p2.size()-1); //todo for real tho how are the piles organized
           wRidgeCount2-=1;
-
+          setWRidgeImage(wRidgeCount2, wRidge2);
         }
 
       }
@@ -677,6 +741,7 @@ public class scrnGame extends AppCompatActivity {
         if(p3.size()==1 &&rRidgeCount3>=1){
           rRidgeCount3-=1;
           c3=createCard(imgCard3);
+          setRRidgeImage(rRidgeCount3, rRidge3);
         }
         else if(p3.size()==1){
           //make blank
@@ -685,6 +750,7 @@ public class scrnGame extends AppCompatActivity {
           c3= p3.get(p3.size()-2);
           p3.remove(p3.size()-1);
           wRidgeCount3-=1;
+          setWRidgeImage(wRidgeCount3, wRidge3);
         }
       }
 
@@ -692,6 +758,7 @@ public class scrnGame extends AppCompatActivity {
         if(p4.size()==1 && rRidgeCount4>=1){
           rRidgeCount4-=1;
           c4= createCard(imgCard4);
+          setRRidgeImage(rRidgeCount4, rRidge4);
         }
         else if(p4.size()==1){
           //make blank
@@ -700,6 +767,7 @@ public class scrnGame extends AppCompatActivity {
           c4=p4.get(p4.size()-2);
           p4.remove(p4.size()-1);
           wRidgeCount4-=1;
+          setWRidgeImage(wRidgeCount3, wRidge3);
         }
       }
 
@@ -707,20 +775,23 @@ public class scrnGame extends AppCompatActivity {
         if(p5.size()==1&&rRidgeCount5>=1){
           rRidgeCount5-=1;
           c5=createCard(imgCard5);
+          setRRidgeImage(rRidgeCount5,rRidge5);
         }
         else if(p5.size()==1){
-          //make blank
+          // todo make blank
         }
         else if(p5.size()>1){
           c5= p5.get(p5.size()-2);
           p5.remove(p5.size()-1);
           wRidgeCount5-=1;
+          setWRidgeImage(wRidgeCount5, wRidge5);
         }
       }
       else if(intClick==6){
         if(p6.size()==1&&rRidgeCount6>=1){
           rRidgeCount6-=1;
           c6=createCard(imgCard6);
+          setRRidgeImage(rRidgeCount6,rRidge6);
         }
         else if(p6.size()==1){
           //blanks
@@ -729,6 +800,7 @@ public class scrnGame extends AppCompatActivity {
           c6= p6.get(p6.size()-2);
           p6.remove(p6.size()-1);
           wRidgeCount6-=1;
+          setWRidgeImage(wRidgeCount6, wRidge6);
         }
       }
       // c6=createCard(imgCard6);
@@ -736,6 +808,7 @@ public class scrnGame extends AppCompatActivity {
         if(p7.size()==1 &&rRidgeCount7>=1){
           rRidgeCount7-=1;
           c7=createCard(imgCard7);
+          setRRidgeImage(rRidgeCount7,rRidge7);
         }
         else if(p7.size()==1){
           //blanks
@@ -744,6 +817,7 @@ public class scrnGame extends AppCompatActivity {
           c7=p7.get(p7.size()-2);
           p7.remove(p7.size()-1);
           wRidgeCount7-=1;
+          setWRidgeImage(wRidgeCount7,wRidge7);
         }
       }
     }
@@ -879,6 +953,67 @@ public class scrnGame extends AppCompatActivity {
           break;
         default:b.setImageResource(R.drawable.fillercard);
       }
+    }
+  }
+  //todo what do when ridge count zero
+  public void setWRidgeImage(int i, ImageView btn){
+    switch(i){
+      case 0:btn.setImageDrawable(null);
+        break;
+      case 1: btn.setImageResource(R.drawable.whiteridge1);
+        break;
+      case 2: btn.setImageResource(R.drawable.whiteridge2);
+        break;
+      case 3: btn.setImageResource(R.drawable.whiteridge3);
+        break;
+      case 4: btn.setImageResource(R.drawable.whiteridge4);
+        break;
+      case 5: btn.setImageResource(R.drawable.whiteridge5);
+        break;
+      case 6: btn.setImageResource(R.drawable.whiteridge6);
+        break;
+      case 7: btn.setImageResource(R.drawable.whiteridge7);
+        break;
+      case 8: btn.setImageResource(R.drawable.whiteridge8);
+        break;
+      case 9: btn.setImageResource(R.drawable.whiteridge9);
+        break;
+      case 10: btn.setImageResource(R.drawable.whiteridge10);
+        break;
+      case 11: btn.setImageResource(R.drawable.whiteridge11);
+        break;
+      case 12: btn.setImageResource(R.drawable.whiteridge12);
+        break;
+      case 13: btn.setImageResource(R.drawable.whiteridge13);
+        break;
+      default: btn.setImageDrawable(null);
+    }
+  }
+  public void setRRidgeImage(int i, ImageView btn){// check to make sure ridges are image buttons
+    switch (i){
+      case 0: btn.setImageDrawable(null);
+        break;
+      case 1: btn.setImageResource(R.drawable.redridge1);
+        break;
+      case 2: btn.setImageResource(R.drawable.redridge2);
+        break;
+      case 3: btn.setImageResource(R.drawable.redridge3);
+        break;
+      case 4: btn.setImageResource(R.drawable.redridge4);
+        break;
+      case 5: btn.setImageResource(R.drawable.redridge5);
+        break;
+      case 6: btn.setImageResource(R.drawable.redridge6);
+        break;
+      default:btn.setImageDrawable(null);
+    }
+  }
+
+
+  //if the user has a king in each suit pile they win---if they win set something to win
+  public void checkIfWin(){
+    if(cDiamond.getRank()==13 && cClub.getRank()==13 && cHeart.getRank()==13 && cSpade.getRank()==13){
+      btnRestart.setText("WINNER! TO RESTART CLICK HERE");
     }
   }
 }
