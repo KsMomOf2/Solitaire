@@ -109,6 +109,8 @@ public class Card {
 
   //check if one card is a correct soduko match
   public boolean isBellow(Card c){
+    if(c.getRank()==0 &&c.getSuit()=="")
+      return true;
     if(rank== (c.getRank() -1)){
 
       //check if opposite color
