@@ -1,10 +1,10 @@
 package com.bishopireton.solitaire;
 //package com.example.innisa.solitaireproject;
 
-        import android.graphics.drawable.Drawable;
-        import android.media.Image;
+       // import android.graphics.drawable.Drawable;
+       // import android.media.Image;
         import android.os.Bundle;
-        import android.provider.ContactsContract;
+        //import android.provider.ContactsContract;
 //        import android.support.design.widget.FloatingActionButton;
 //        import android.support.design.widget.Snackbar;
         import android.support.v7.app.AppCompatActivity;
@@ -17,7 +17,8 @@ package com.bishopireton.solitaire;
         import java.util.ArrayList;
 
 public class scrnGame extends AppCompatActivity {
-  private Deck d;
+  private Deck d1;
+  private Deck d2;
   private ImageButton imgCardPlay;
   private ImageButton imgCard1;
   private ImageButton imgCard2;
@@ -85,7 +86,7 @@ public class scrnGame extends AppCompatActivity {
   private int wRidgeCount4;
   private int wRidgeCount5;
   private int wRidgeCount6;
-  private int wRidgeCount7; //todo dont i use this when moving one deck to another
+  private int wRidgeCount7;
 
   private ArrayList<Card> p1;
   private ArrayList<Card> p2;
@@ -102,15 +103,9 @@ public class scrnGame extends AppCompatActivity {
 
   private int deckNum=0; //stores number of deck if isDeckClicked is false
 
-  //todo quit button
-  //todo quit, when lose, when win, when deck runs  out of cards,
-  //todo if pile empty and there are red left flip those jaunts
-  //todo refresh deck when none
+
   //todo before test code walk through it all
-  //todo win lose make sure on clicks
   //todo watch out for null
-  //todo change icon\
-  //todo images ---call the method everywhere
 
 
 //WHAT DOING RN RIDGES/IMAGES
@@ -146,7 +141,10 @@ public class scrnGame extends AppCompatActivity {
         */
 
     //create a deck
-    d= new Deck();
+    d1= new Deck();
+    d2= new Deck();
+    d2.emptyDeck();
+
     imgCardPlay= (ImageButton) findViewById(R.id.imgCardPlay);
     imgCard1= (ImageButton) findViewById(R.id.imgCard1);
     imgCard2= (ImageButton) findViewById(R.id.imgCard2);
@@ -415,7 +413,12 @@ public class scrnGame extends AppCompatActivity {
         setCardImage(imgCard7,c7);
       }
 
-      pick= createCard(imgCardPlay);
+      if(d2.size()>0) {
+        pick = d2.getCard(d2.size() - 1);
+        setCardImage(imgCardPlay, pick);
+      }
+      else
+        pick= createCard(imgCardPlay);
       isPlayClick=false;
       //if b==imgcard1 add to wRidgeCount1
 
@@ -455,11 +458,20 @@ public class scrnGame extends AppCompatActivity {
 
 
   }
-
+  //when the deck is clicked change image play and add the old image play to botton
+  //todo make sure image play changes right--when move image play--and make sure call this method
+  //call everytime deck is clicked //when move imageplay dont get new card set play to the end of d2
+  //everytime deck is clicked call this method
+  //everytime play is moved get last card in other deck
+  public void regulateDeck(){
+    d2.addCard(pick);
+    createCard(imgCardPlay);
+    //if d1 doesnt have any cards left
+  }
   //reset the app/ run at beginning too
   public void reset(){
     //shuffle the deck
-    d.shuffleDeck();
+    d1.shuffleDeck();
 
     //pick card from top of deck--
     //pick a random card from the deck, set the image of that card (or do that in the card class) ask mrs kelly
@@ -485,18 +497,18 @@ public class scrnGame extends AppCompatActivity {
     cClub=null;
     cHeart=null;
     cSpade=null;
-    Card dDiamond= createCard(imgDeckDiamond);
-    Card dSpade= createCard(imgDeckSpade);
-    Card dClub= createCard(imgDeckClub);
-    Card dHeart= createCard(imgDeckHeart);
+//    Card dDiamond= createCard(imgDeckDiamond);
+//    Card dSpade= createCard(imgDeckSpade);
+//    Card dClub= createCard(imgDeckClub);
+//    Card dHeart= createCard(imgDeckHeart);
 
     isPlayClick=false;
     isDeckClick=false;
     deckClick=null;
     intClick=0;
 
-    //TODO then set the aces ones to blank
-    //TODO reset ridge images
+    //TODO then set the aces ones to blank--make sure those images specify where go
+
     rRidgeCount2=1;
     rRidgeCount3=2;
     rRidgeCount4=3;
@@ -511,6 +523,23 @@ public class scrnGame extends AppCompatActivity {
     wRidgeCount5=0;
     wRidgeCount6=0;
     wRidgeCount7=0;
+
+    //reset all ridge images
+    setRRidgeImage(rRidgeCount2, rRidge2);
+    setRRidgeImage(rRidgeCount3, rRidge3);
+    setRRidgeImage(rRidgeCount4, rRidge4);
+    setRRidgeImage(rRidgeCount5, rRidge5);
+    setRRidgeImage(rRidgeCount6, rRidge6);
+    setRRidgeImage(rRidgeCount7, rRidge7);
+
+    setWRidgeImage(wRidgeCount1, wRidge1);
+    setWRidgeImage(wRidgeCount2, wRidge2);
+    setWRidgeImage(wRidgeCount3, wRidge3);
+    setWRidgeImage(wRidgeCount4, wRidge4);
+    setWRidgeImage(wRidgeCount5, wRidge5);
+    setWRidgeImage(wRidgeCount6, wRidge6);
+    setWRidgeImage(wRidgeCount7, wRidge7);
+
 
     p1=new ArrayList<>();
     p1.add(c1);
@@ -532,13 +561,23 @@ public class scrnGame extends AppCompatActivity {
     pHeart= new ArrayList<>();
     pSpade= new ArrayList<>();
 
+    imgDeckClub.setImageResource(R.drawable.blankclubs);
+    imgDeckDiamond.setImageResource(R.drawable.blankdiamonds);
+    imgDeckHeart.setImageResource(R.drawable.blankhearts);
+    imgDeckSpade.setImageResource(R.drawable.blankspades);
+
   }
   //create a card- pick it randomly from the deck and remove it
   public Card createCard(ImageButton img){
-    Card c= d.pickACard();
-    c= d.removeCard(c);
-    setCardImage(img,c);
+    if(d1.size()==0) {
+      d1 = d2;
+      d2.emptyDeck();
+    }
+    Card c = d1.pickACard();
+    c = d1.removeCard(c);
+    setCardImage(img, c);
     return c;
+
   }
 
 
@@ -622,7 +661,6 @@ public class scrnGame extends AppCompatActivity {
     //do move deck to suit after first do pile
     //todo img
 
-    //todo put an image for the empty piles so they know which suit goes w which
     //check to see if the card works
     //figure out what card is on the top of the deck clicked
 
@@ -653,7 +691,13 @@ public class scrnGame extends AppCompatActivity {
         cSpade=pick;
         setCardImage(imgDeckSpade,pick);
       }
-      pick= createCard(imgCardPlay);
+      //createCard(imgCardPlay);
+      if(d2.size()>0) {
+        pick = d2.getCard(d2.size() - 1);
+        setCardImage(imgCardPlay, pick);
+      }
+      else
+        pick= createCard(imgCardPlay);
     }
     //for if trying to move an ace
     else if(isPlayClick&&suitCard==null&&pick.getRank()==1){//dont even think i need to check if suitCard is null
@@ -677,7 +721,12 @@ public class scrnGame extends AppCompatActivity {
         cSpade=pick;
         setCardImage(imgDeckHeart,pick);
       }
-      pick=createCard(imgCardPlay);
+      if(d2.size()>0) {
+        pick = d2.getCard(d2.size() - 1);
+        setCardImage(imgCardPlay, pick);
+      }
+      else
+        pick= createCard(imgCardPlay);
 
     }
     //for moving a deck
@@ -828,8 +877,7 @@ public class scrnGame extends AppCompatActivity {
   public void setCardImage(ImageButton b, Card c){
     int rankCheck= c.getRank();
     if(c.getSuit().equals("Diamonds")){
-      //todo be careful might be able to condense some of this
-      //todo use a switch statement
+
       switch(rankCheck){
         case 1: b.setImageResource(R.drawable.diamondsace);
           break;
@@ -1010,10 +1058,12 @@ public class scrnGame extends AppCompatActivity {
   }
 
 
-  //if the user has a king in each suit pile they win---if they win set something to win
+  //if the user has a king in each suit pile they win---if they win set something to win //todo call this method
   public void checkIfWin(){
     if(cDiamond.getRank()==13 && cClub.getRank()==13 && cHeart.getRank()==13 && cSpade.getRank()==13){
       btnRestart.setText("WINNER! TO RESTART CLICK HERE");
     }
   }
+
+
 }

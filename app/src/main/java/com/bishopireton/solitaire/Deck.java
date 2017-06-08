@@ -152,6 +152,13 @@ public class Deck extends Card{
       return null;
   }
 
+  public void addCard(Card c){
+    deck.add(c);
+  }
+
+  public Card getCard(int i){
+    return deck.get(i);
+  }
 
 
 }
