@@ -525,10 +525,10 @@ public class scrnGame extends AppCompatActivity {
     pSpade= new ArrayList<>();
 
     //set the initial images of the suit piles
-    imgDeckClub.setImageResource(R.drawable.blankclubs);
-    imgDeckDiamond.setImageResource(R.drawable.blankdiamonds);
-    imgDeckHeart.setImageResource(R.drawable.blankhearts);
-    imgDeckSpade.setImageResource(R.drawable.blankspades);
+    imgDeckClub.setImageResource(R.drawable.blankcard);
+    imgDeckDiamond.setImageResource(R.drawable.blankcard);
+    imgDeckHeart.setImageResource(R.drawable.blankcard);
+    imgDeckSpade.setImageResource(R.drawable.blankcard);
 
   }
 
