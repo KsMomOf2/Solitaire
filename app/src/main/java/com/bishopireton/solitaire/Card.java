@@ -109,12 +109,12 @@ public class Card {
 
   //check if one card is a correct soduko match
   public boolean isBellow(Card c){
-    /*if(c.getRank()==0 &&c.getSuit()=="")
+    if(c.getRank()==0)
       return true;
     if(rank== (c.getRank() -1)){
-        return true; //TODO change
+       // return true;
       //check if opposite color
-      /*if(suit.equals(CLUB_STRING) || suit.equals(DIAMOND_STRING)){
+      if(suit.equals(CLUB_STRING) || suit.equals(DIAMOND_STRING)){
         if(c.getSuit().equals(SPADE_STRING) || c.getSuit().equals(HEART_STRING))
           return true;
       }
@@ -122,20 +122,22 @@ public class Card {
         if(c.getSuit().equals(CLUB_STRING) || c.getSuit().equals(DIAMOND_STRING))
           return true;
       }
+     return true;
     }
-    return false;*/
-    return true;
+    return false;
+    //return true;
   }
 
   //check if can add to a suit stack-- if suit is same--if rank is above
   public boolean canAddSuitStack(Card c){
-   /* if(rank== (c.getRank() +1)){
+    if(rank==0)
+      return true;
+    if(rank== (c.getRank() +1)){
       if(suit.equals(c.getSuit()))
         return true;
     }
 
-    return false;*/
-   //todo fix later
-    return true;
+    return false;
+    //return true;
   }
 }

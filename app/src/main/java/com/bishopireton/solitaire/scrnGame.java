@@ -99,7 +99,7 @@ public class scrnGame extends AppCompatActivity {
   private int deckNum=0; //stores number of deck if isDeckClicked is false
 
 
-
+//TODO numbers???, not removing certain cards, suits is not perfect, keeps stopping-cant complete a game, restart, white cards are in reverse order
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -209,7 +209,7 @@ public class scrnGame extends AppCompatActivity {
   //set the onClickListeners for the suit cards
   public void suitOnClickListener(ImageButton b){
     b.setOnClickListener(new View.OnClickListener() {
-      public void onClick(View v) {//TODO come back to this once finish deck OnClickListener
+      public void onClick(View v) {
         moveToSuitOnClick((ImageButton)findViewById(v.getId()));//caste as button etc//v.getId and save it somewhere as the button
       }
     });
@@ -233,12 +233,12 @@ public class scrnGame extends AppCompatActivity {
         Card cCheck= pMove.get(0); //get card at the bottom of the pile
 
         //everything to move one pile to the other
-        if(cCheck.isBellow(pick)){
+        if(cCheck.isBellow(btnToCard(b))){
           int intMoveTo= btnToInt(b);
           if(intMoveTo!=intClick) {
             //add to the correct piles the cards from the second pile(intClick)
             if (intMoveTo == 1) {
-              //TODO  check pMove
+              //TODO  check pMove- fix if can
               p1 = combinePiles(p1, pMove);
               wRidgeCount1 = p1.size() - 1;
               setWRidgeImage(wRidgeCount1, wRidge1);
@@ -266,16 +266,16 @@ public class scrnGame extends AppCompatActivity {
               p7 = combinePiles(p7, pMove);
               wRidgeCount7 = p7.size() - 1;
               setWRidgeImage(wRidgeCount7, wRidge7);
-            }/*
+            }
 
             //set first click pile to a drawn card
             if (intClick == 1) {
               p1 = new ArrayList<>();
-              //p1.add(createCard(imgCard1)); ADD NEW CARD LATER BC MIGHT LEAVE SLOT EMPTY-IF RED CARD FLIP IF NO RED CARD LEAVE BLANK
+              p1.add(createCard(imgCard1));//todo if more time just leave blank
 
-            }//todo check AND UNCOMMENT BUT NEED TO THINK THROUGH FIRST
-            */
-            if (intClick == 2) {//todo make else if
+            }
+
+            else if (intClick == 2) {
               p2 = new ArrayList<>();
               if (rRidgeCount2 > 0) {
                 p2.add(createCard(imgCard2));
@@ -356,33 +356,41 @@ public class scrnGame extends AppCompatActivity {
       //if statement to see what card to change
       //change b to p's image
       if (b.equals(imgCard1)) {
-        p1.add(pick);//todo check
         c1 = pick;
-        setCardImage(imgCard1, c1);
+        setCardImage(imgCard1, pick);
+        //p1.add(pick);//todo check
+        p1.add(p1.size()-1,pick);
       } else if (b.equals(imgCard2)) {
-        p2.add(pick);
         c2 = pick;
-        setCardImage(imgCard2, c2);
+        setCardImage(imgCard2, pick);
+        //p2.add(pick);
+        p2.add(p2.size()-1,pick);
       } else if (b.equals(imgCard3)) {
-        p3.add(pick);
         c3 = pick;
-        setCardImage(imgCard3, c3);
+        setCardImage(imgCard3, pick);
+        //p3.add(pick);
+        p3.add(p1.size()-1,pick);
       } else if (b.equals(imgCard4)) {
-        p4.add(pick);
         c4 = pick;
-        setCardImage(imgCard4, c4);
+        setCardImage(imgCard4, pick);
+        //p4.add(pick);
+        p4.add(p1.size()-1,pick);
       } else if (b.equals(imgCard5)) {
-        p5.add(pick);
+        setCardImage(imgCard5, pick);
+        //p5.add(pick);
+        p5.add(p1.size()-1,pick);
         c5 = pick;
-        setCardImage(imgCard5, c5);
       } else if (b.equals(imgCard6)) {
-        p5.add(pick);
+        setCardImage(imgCard6, pick);
+       // p5.add(pick);
+        p6.add(p1.size()-1,pick);
         c6 = pick;
-        setCardImage(imgCard6, c6);
-      } else {
-        p6.add(pick);
+      } else if(b.equals(imgCard7)) {
+        //c7 = pick;
+        setCardImage(imgCard7, pick);
+        //p7.add(pick);
+        p7.add(p1.size()-1,pick);
         c7 = pick;
-        setCardImage(imgCard7, c7);
       }
 
       //when move card pick- show the last card pick, if there even is one
@@ -419,7 +427,7 @@ public class scrnGame extends AppCompatActivity {
         wRidgeCount6 += 1;
         setWRidgeImage(wRidgeCount6, wRidge6);
       }
-      else {
+      else if(b.equals(imgCard7)) {
         wRidgeCount7 += 1;
         setWRidgeImage(wRidgeCount6,wRidge6);
       }
@@ -532,7 +540,7 @@ public class scrnGame extends AppCompatActivity {
       d2.emptyDeck();
     }
     Card c = d1.pickACard();
-    //c = d1.removeCard(c);
+   // c = d1.removeCard(c);
     setCardImage(img, c);
     return c;
 
@@ -599,6 +607,26 @@ public class scrnGame extends AppCompatActivity {
       return 0;
   }
 
+  //return a card from an int
+  public Card intToCard(int i){
+    if(i==1)
+      return c1;
+    else if(i==2)
+      return c2;
+    else if(i==3)
+      return c3;
+    else if(i==4)
+      return c4;
+    else if(i==5)
+      return c5;
+    else if(i==6)
+      return c6;
+    else if(i==7)
+      return c7;
+    else
+      return new Card(0,"Clubs");
+  }
+
   //combines two piles and returns the new pile
   public ArrayList<Card> combinePiles(ArrayList<Card> a, ArrayList<Card> b){
     for(int i=0;i<b.size();i++){
@@ -613,13 +641,13 @@ public class scrnGame extends AppCompatActivity {
 
     //when click on pick then a suit card
     Card suitCard;
-    //suitCard=btnToCard(b);//make sure not null//TODO un comment!!!!!!!!!!!!!!!!!
-    suitCard=new Card(7,"Spades");
+    suitCard=btnToCard(b);//make sure not null/
+    //suitCard=new Card(7,"Spades");
 
     //do move deck to suit after first do pile
 
     //moving card pick to a suit stack
-    if(pick.canAddSuitStack(suitCard)&& isPlayClick && suitCard!=null){
+    if(pick.canAddSuitStack(suitCard)&& isPlayClick ){
       //figure out what suit pile using --from imagebutton
       // in this part  add card to suitpile, draw a new card, set the suit card to pick, change images
       if(b.equals(imgDeckClub)) {
@@ -652,26 +680,46 @@ public class scrnGame extends AppCompatActivity {
     }
 
     //for if trying to move an ace to a suit pile
-    else if(isPlayClick&&suitCard.getRank()==0&&pick.getRank()==1){
+    int clickedRank=0;
+   if(isDeckClick){
+      if(intClick==1)
+        clickedRank=c1.getRank();
+      else if(intClick==2)
+        clickedRank=c2.getRank();
+      else if(intClick==3)
+        clickedRank=c3.getRank();
+      else if(intClick==4)
+        clickedRank=c4.getRank();
+      else if(intClick==5)
+        clickedRank=c5.getRank();
+      else if(intClick==6)
+        clickedRank=c6.getRank();
+      else if(intClick==7)
+        clickedRank=c7.getRank();
+      else
+        clickedRank=0;
+    }
+
+    else if(isDeckClick&&suitCard.getRank()==0&& clickedRank==1){
       if(b.equals(imgDeckClub)){
-        pClub.add(pick);
-        cClub=pick;
-        setCardImage(imgDeckClub,pick);
+        pClub.add(intToCard(intClick));
+        cClub= intToCard(intClick);
+        setCardImage(imgDeckClub,intToCard(intClick));
       }
       else if(b.equals(imgDeckDiamond)){
-        pDiamond.add(pick);
-        cDiamond=pick;
-        setCardImage(imgDeckDiamond,pick);
+        pDiamond.add(intToCard(intClick));
+        cDiamond=intToCard(intClick);
+        setCardImage(imgDeckDiamond,intToCard(intClick));
       }
       else if(b.equals(imgDeckHeart)){
-        pHeart.add(pick);
-        cHeart= pick;
-        setCardImage(imgDeckHeart,pick);
+        pHeart.add(intToCard(intClick));
+        cHeart= intToCard(intClick);
+        setCardImage(imgDeckHeart,intToCard(intClick));
       }
       else if(b.equals(imgDeckSpade)){
-        pSpade.add(pick);
-        cSpade=pick;
-        setCardImage(imgDeckHeart,pick);
+        pSpade.add(intToCard(intClick));
+        cSpade=intToCard(intClick);
+        setCardImage(imgDeckSpade,intToCard(intClick));
       }
       if(d2.size()>0) {
         pick = d2.getCard(d2.size() - 1);
@@ -682,7 +730,6 @@ public class scrnGame extends AppCompatActivity {
 
     }
     //for moving a deck to a suit pile
-    //todo make sure I change is deckClick
      if(isDeckClick&&deckClick.canAddSuitStack(suitCard)&&suitCard!=null&&deckClick!=null){
       if(b.equals(imgDeckClub)) {
         pClub.add(deckClick);
@@ -706,19 +753,17 @@ public class scrnGame extends AppCompatActivity {
       }
 
       //change the image of the pile
-      //todo make sure change images here
-       //todo so it moves 8 to a suit pile but also leaves 8
       if(intClick==1) {
         if(wRidgeCount1>0) {
           c1= p1.get(1);
           setCardImage(imgCard1,c1);
-          //c1 = createCard(imgCard1);//todo check
+          //c1 = createCard(imgCard1);
           wRidgeCount1-=1;
           setWRidgeImage(wRidgeCount1,wRidge1);
           }
         else
           c1=new Card("",0);
-          imgCard1.setImageDrawable(null);//todo when change image do i have to make this not null
+          imgCard1.setImageDrawable(null);
 
       }
       else if(intClick==2) {
@@ -727,7 +772,7 @@ public class scrnGame extends AppCompatActivity {
           rRidgeCount2-=1;
           setRRidgeImage(rRidgeCount2, rRidge2);
           c2= createCard(imgCard2);
-          //p2.remove(0); TODO check if need add this
+          //p2.remove(0);
         }
         else if(checkIfBlank(wRidgeCount2,rRidgeCount2)) {//if no ridges at all make blank
           c2=new Card("",0);
@@ -739,12 +784,11 @@ public class scrnGame extends AppCompatActivity {
           //remove one from white ridges
          // p2.remove(p2.size()-1);
           p2.remove(0);
-          //c2=p2.get(0);//TODO why isnt this working
+          //c2=p2.get(0);
           wRidgeCount2-=1;
           setWRidgeImage(wRidgeCount2, wRidge2);
           setCardImage(imgCard2, c2);
         }
-//TODO mehhhhhh do this laterrrrrrrrrrrrrr
       }
       else if(intClick==3){
         if(p3.size()==1 &&rRidgeCount3>=1){

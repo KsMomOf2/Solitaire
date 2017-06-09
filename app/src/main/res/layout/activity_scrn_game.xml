@@ -83,12 +83,12 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="300dp"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="70dp"
-                android:layout_height="match_parent"
+                android:layout_height="290dp"
                 android:orientation="vertical">
 
                 <ImageView
@@ -101,7 +101,7 @@
                 <ImageView
                     android:id="@+id/imgWRidge1"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     app:srcCompat="@android:drawable/editbox_background_normal" />
 
                 <ImageButton
@@ -113,7 +113,7 @@
 
             <LinearLayout
                 android:layout_width="70dp"
-                android:layout_height="match_parent"
+                android:layout_height="290dp"
                 android:orientation="vertical">
 
                 <ImageView
@@ -125,7 +125,7 @@
                 <ImageView
                     android:id="@+id/imgWRidge2"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="70dp"
                     android:layout_weight="1"
                     app:srcCompat="@android:drawable/editbox_background_normal" />
 
@@ -138,7 +138,7 @@
 
             <LinearLayout
                 android:layout_width="70dp"
-                android:layout_height="match_parent"
+                android:layout_height="290dp"
                 android:orientation="vertical">
 
                 <ImageView
@@ -150,7 +150,7 @@
                 <ImageView
                     android:id="@+id/imgWRidge3"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="70dp"
                     app:srcCompat="@android:drawable/editbox_background_normal" />
 
                 <TextView
@@ -168,7 +168,7 @@
 
             <LinearLayout
                 android:layout_width="70dp"
-                android:layout_height="match_parent"
+                android:layout_height="290dp"
                 android:orientation="vertical">
 
                 <ImageView
@@ -180,7 +180,7 @@
                 <ImageView
                     android:id="@+id/imgWRidge4"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="70dp"
                     app:srcCompat="@android:drawable/editbox_background_normal" />
 
                 <TextView
@@ -198,7 +198,7 @@
 
             <LinearLayout
                 android:layout_width="70dp"
-                android:layout_height="match_parent"
+                android:layout_height="290dp"
                 android:orientation="vertical">
 
                 <ImageView
@@ -210,7 +210,7 @@
                 <ImageView
                     android:id="@+id/imgWRidge5"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     app:srcCompat="@android:drawable/editbox_background_normal" />
 
                 <TextView
@@ -228,7 +228,7 @@
 
             <LinearLayout
                 android:layout_width="70dp"
-                android:layout_height="match_parent"
+                android:layout_height="290dp"
                 android:orientation="vertical">
 
                 <ImageView
@@ -240,7 +240,7 @@
                 <ImageView
                     android:id="@+id/imgWRidge6"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="70dp"
                     app:srcCompat="@android:drawable/editbox_background_normal" />
 
                 <TextView
@@ -259,7 +259,7 @@
 
             <LinearLayout
                 android:layout_width="70dp"
-                android:layout_height="match_parent"
+                android:layout_height="290dp"
                 android:orientation="vertical">
 
                 <ImageView
@@ -270,8 +270,8 @@
 
                 <ImageView
                     android:id="@+id/imgWRidge7"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="70dp"
                     app:srcCompat="@android:drawable/editbox_background_normal" />
 
                 <TextView
@@ -297,7 +297,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="50dp"
                 android:orientation="vertical">
 
                 <Button
