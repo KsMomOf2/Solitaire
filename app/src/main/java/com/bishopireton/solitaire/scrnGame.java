@@ -190,7 +190,7 @@ public class scrnGame extends AppCompatActivity {
     suitOnClickListener(imgDeckClub);
     suitOnClickListener(imgDeckDiamond);
     suitOnClickListener(imgDeckHeart);
-    suitOnClickListener(imgDeckSpade);
+    suitOnClickListener(imgDeckSpade);//todo make sure is playClick and isDeckClick are never the same
 
   }
 
@@ -343,6 +343,7 @@ public class scrnGame extends AppCompatActivity {
         }
       }
     }
+    checkIfWin();
   }
 
   //move cards from play to other piles
@@ -350,7 +351,7 @@ public class scrnGame extends AppCompatActivity {
     Card corrWithImg;
     corrWithImg=btnToCard(b);
 
-
+    isDeckClick=false;
     //check to see if the card works
     if(pick.isBellow(corrWithImg)&& isPlayClick) {
       //if statement to see what card to change
@@ -433,7 +434,7 @@ public class scrnGame extends AppCompatActivity {
       }
 
     }
-
+    checkIfWin();
 
 
   }
@@ -468,7 +469,7 @@ public class scrnGame extends AppCompatActivity {
     //set initial values
     isPlayClick=false;
     isDeckClick=false;
-    deckClick=null;
+    deckClick=null;//WHATCH THIS
     intClick=0;
 
 
@@ -730,7 +731,7 @@ public class scrnGame extends AppCompatActivity {
 
     }
     //for moving a deck to a suit pile
-     if(isDeckClick&&deckClick.canAddSuitStack(suitCard)&&suitCard!=null&&deckClick!=null){
+     if(isDeckClick&&deckClick!=null &&suitCard!=null &&deckClick.canAddSuitStack(suitCard)){
       if(b.equals(imgDeckClub)) {
         pClub.add(deckClick);
         cClub=deckClick;
@@ -884,6 +885,7 @@ public class scrnGame extends AppCompatActivity {
         }
       }
     }
+    checkIfWin();
 
   }
 

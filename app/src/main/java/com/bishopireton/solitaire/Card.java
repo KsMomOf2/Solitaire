@@ -109,7 +109,7 @@ public class Card {
 
   //check if one card is a correct soduko match
   public boolean isBellow(Card c){
-    if(c.getRank()==0)
+    /*if(c.getRank()==0)
       return true;
     if(rank== (c.getRank() -1)){
        // return true;
@@ -124,20 +124,20 @@ public class Card {
       }
      return true;
     }
-    return false;
-    //return true;
+    return false;*/
+    return true;
   }
 
   //check if can add to a suit stack-- if suit is same--if rank is above
   public boolean canAddSuitStack(Card c){
-    if(rank==0)
+    /*if(rank==0)
       return true;
     if(rank== (c.getRank() +1)){
       if(suit.equals(c.getSuit()))
         return true;
     }
 
-    return false;
-    //return true;
+    return false;*/
+    return true;
   }
 }
