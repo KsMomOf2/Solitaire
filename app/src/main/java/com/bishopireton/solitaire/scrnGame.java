@@ -115,24 +115,7 @@ public class scrnGame extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_scrn_game);
-        /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
-        /*
-        button.setOnClickListener(new View.OnClickListener() {
-        public void onClick(View v) {
-            startActivity(new Intent(MainActivity.this,StandingsActivity.class));
-        }
-    });
-        */
 
     //create a deck
     d1= new Deck();
@@ -171,35 +154,36 @@ public class scrnGame extends AppCompatActivity {
     wRidge7=(ImageView)findViewById(R.id.imgWRidge7);
 
     btnRestart=(Button)findViewById(R.id.btnRestart);
+
     //PUT STUFF ON THE LAYOUT
     reset();
-    //pick random card - for put down on back(nah just do when turn over)
-    // for 7 put up
-    //for take out of deck
 
     //when imgCardPlay is clickedchange a variable to see if anything else is changed
     //maybe if time when clicked take the borders off the image
-    imgCardPlay.setOnClickListener(new View.OnClickListener() {
+   imgCardPlay.setOnClickListener(new View.OnClickListener() {//TODO start here getting error
       public void onClick(View v) {
         //isPlayClick= true; //reminder when anything else is clicked change this
         if (isPlayClick == true)
           isPlayClick = false;
         else
           isPlayClick = true;
+        isDeckClick=false;
       }
     });
 
-    btnRestart.setOnClickListener(new View.OnClickListener() {
+   btnRestart.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        reset();
+        //restartGame();//TODO fix this
       }
     });
     //set the onclickListeners for each deck
     imgDeck.setOnClickListener(new View.OnClickListener() {
       public void onClick(View v) {
-        //isPlayClick= true; //reminder when anything else is clicked change this
+        //isPlayClick= true; //reminder when anything else is clicked change this//TODO double check
+        //TODO rip to me!!!!
         regulateDeck();
+        isPlayClick=false;
       }
     });
     //send in each suit image
@@ -222,7 +206,9 @@ public class scrnGame extends AppCompatActivity {
   public void pileOnClickListener(ImageButton b){
     b.setOnClickListener(new View.OnClickListener() {
       public void onClick(View v) {
-        imgDeckOnClickListener((ImageButton)findViewById(v.getId()));//caste as button etc//v.getId and save it somewhere as the button
+        imgDeckOnClickListener((ImageButton)findViewById(v.getId()));
+
+        //caste as button etc//v.getId and save it somewhere as the button
         deckMoveOnClickListener((ImageButton)findViewById(v.getId()));
       }
     });
@@ -231,7 +217,7 @@ public class scrnGame extends AppCompatActivity {
   //set the onClickListeners for the suit cards
   public void suitOnClickListener(ImageButton b){
     b.setOnClickListener(new View.OnClickListener() {
-      public void onClick(View v) {
+      public void onClick(View v) {//TODO come back to this once finish deck OnClickListener
         moveToSuitOnClick((ImageButton)findViewById(v.getId()));//caste as button etc//v.getId and save it somewhere as the button
       }
     });
@@ -250,15 +236,15 @@ public class scrnGame extends AppCompatActivity {
       //then here i would just have to save the card /////////////////////
       //gonna save a number cuz I feel like it might help
     }
-    else {
+   else {
       isDeckClick = false;
       //check if can move first pile to the second
-      if(deckClick!=null && pMove!=null){
+
+      if(deckClick!=null && pMove.size()!=0){
         //check if bottom of first is bellow top of second
         //find bottom card of deck click
         //make methods for piles
-        Card cCheck= pMove.get(1); //get card at the bottom of the pile
-
+        Card cCheck= pMove.get(0); //get card at the bottom of the pile
         //everything to move one pile to the other
         if(cCheck.isBellow(pick)){
           //move the deck to that deck!-- change the white spaces,change the face card
@@ -301,15 +287,16 @@ public class scrnGame extends AppCompatActivity {
               p7 = combinePiles(p7, pMove);
               wRidgeCount7 = p7.size() - 1;
               setWRidgeImage(wRidgeCount7, wRidge7);
-            }
+            }/*
 
             //set first click pile to a drawn card
             if (intClick == 1) {
               p1 = new ArrayList<>();
               //p1.add(createCard(imgCard1)); ADD NEW CARD LATER BC MIGHT LEAVE SLOT EMPTY-IF RED CARD FLIP IF NO RED CARD LEAVE BLANK
 
-            }//todo check
-            else if (intClick == 2) {
+            }//todo check AND UNCOMMENT BUT NEED TO THINK THROUGH FIRST
+            */
+            if (intClick == 2) {//todo make else if
               p2 = new ArrayList<>();
               if (rRidgeCount2 > 0) {
                 p2.add(createCard(imgCard2));
@@ -398,47 +385,42 @@ public class scrnGame extends AppCompatActivity {
 
 
     //check to see if the card works
-    if(pick.isBellow(corrWithImg)&& isPlayClick){
+    if(pick.isBellow(corrWithImg)&& isPlayClick) {
       //if statement to see what card to change
       //change b to p's image //idk if need if statement or not
 
       //maybe modularize
       //can i use a diff method here?
-      if(b.equals(imgCard1)) {
+      if (b.equals(imgCard1)) {
         p1.add(pick);//todo check
         c1 = pick;
-        setCardImage(imgCard1,c1);
-      }
-      else if(b.equals(imgCard2)) {
+        setCardImage(imgCard1, c1);
+      } else if (b.equals(imgCard2)) {
         p2.add(pick);
         c2 = pick;
-        setCardImage(imgCard2,c2);
-      }
-      else if(b.equals(imgCard3)) {
+        setCardImage(imgCard2, c2);
+      } else if (b.equals(imgCard3)) {
         p3.add(pick);
         c3 = pick;
-        setCardImage(imgCard3,c3);
-      }
-      else if(b.equals(imgCard4)) {
+        setCardImage(imgCard3, c3);
+      } else if (b.equals(imgCard4)) {
         p4.add(pick);
         c4 = pick;
-        setCardImage(imgCard4,c4);
-      }
-      else if(b.equals(imgCard5)) {
+        setCardImage(imgCard4, c4);
+      } else if (b.equals(imgCard5)) {
         p5.add(pick);
         c5 = pick;
-        setCardImage(imgCard5,c5);
-      }
-      else if(b.equals(imgCard6)) {
+        setCardImage(imgCard5, c5);
+      } else if (b.equals(imgCard6)) {
         p5.add(pick);
         c6 = pick;
-        setCardImage(imgCard6,c6);
-      }
-      else {
+        setCardImage(imgCard6, c6);
+      } else {
         p6.add(pick);
         c7 = pick;
-        setCardImage(imgCard7,c7);
+        setCardImage(imgCard7, c7);
       }
+
 
       if(d2.size()>0) {
         pick = d2.getCard(d2.size() - 1);
@@ -478,9 +460,7 @@ public class scrnGame extends AppCompatActivity {
         setWRidgeImage(wRidgeCount6,wRidge6);
       }
 
-
     }
-
 
 
 
@@ -490,13 +470,15 @@ public class scrnGame extends AppCompatActivity {
   //everytime deck is clicked call this method
   //everytime play is moved get last card in other deck
   public void regulateDeck(){
-    d2.addCard(pick);
-    createCard(imgCardPlay);
+    d2.addCard(pick);//TODO rn regulate deck isnt working
+    createCard(imgCardPlay);//TODO EVEN THIS ISNT WORKING --like it works, but not more than 10 times
     //if d1 doesnt have any cards left
   }
+
   //reset the app/ run at beginning too
   public void reset(){
     //shuffle the deck
+    d1=new Deck();
     d1.shuffleDeck();
 
     //pick card from top of deck--
@@ -519,10 +501,10 @@ public class scrnGame extends AppCompatActivity {
     c5= createCard(imgCard5);
     c6= createCard(imgCard6);
     c7= createCard(imgCard7);
-    cDiamond=null;
-    cClub=null;
-    cHeart=null;
-    cSpade=null;
+    cDiamond=new Card(0, "Diamonds");
+    cClub=new Card(0, "Clubs");
+    cHeart=new Card(0,"Hearts");
+    cSpade=new Card(0, "Spades");//todo change this in suit method*/
 //    Card dDiamond= createCard(imgDeckDiamond);
 //    Card dSpade= createCard(imgDeckSpade);
 //    Card dClub= createCard(imgDeckClub);
@@ -580,7 +562,7 @@ public class scrnGame extends AppCompatActivity {
     p6.add(c6);
     p7=new ArrayList<>();
     p7.add(c7);
-    pMove = null;
+    pMove = new ArrayList<>();//TODO start here still get stopped error THIS IS GIVING ME AN ERROR WHY
     pDiamond= new ArrayList<>();
     pClub= new ArrayList<>();
     pHeart= new ArrayList<>();
@@ -592,6 +574,102 @@ public class scrnGame extends AppCompatActivity {
     imgDeckSpade.setImageResource(R.drawable.blankspades);
 
   }
+  public void restartGame(){
+    d1=new Deck();
+    d1.shuffleDeck();
+
+    //pick card from top of deck--
+    //pick a random card from the deck, set the image of that card (or do that in the card class) ask mrs kelly
+
+    //remove that card- set the first image to that cards image
+    //ask if can concise the <code></code>
+
+    //set the card picked (doing first cuz easiest to think through)
+    //MODULARIZE MORE
+    //returns a card , you put in a button
+    //am I just setting the images of these cards to imageButtons
+    //do I just change what the image of the iamge button is to change it??????//need images
+
+    pick= createCard(imgCardPlay);
+    c1= createCard(imgCard1);
+    c2= createCard(imgCard2);
+    c3= createCard(imgCard3);
+    c4= createCard(imgCard4);
+    c5= createCard(imgCard5);
+    c6= createCard(imgCard6);
+    c7= createCard(imgCard7);
+    cDiamond=new Card(0, "Diamonds");
+    cClub=new Card(0, "Clubs");
+    cHeart=new Card(0,"Hearts");
+    cSpade=new Card(0, "Spades");//todo change this in suit method*/
+//    Card dDiamond= createCard(imgDeckDiamond);
+//    Card dSpade= createCard(imgDeckSpade);
+//    Card dClub= createCard(imgDeckClub);
+//    Card dHeart= createCard(imgDeckHeart);
+
+    isPlayClick=false;
+    isDeckClick=false;
+    deckClick=null;
+    intClick=0;
+
+
+    rRidgeCount2=1;
+    rRidgeCount3=2;
+    rRidgeCount4=3;
+    rRidgeCount5=4;
+    rRidgeCount6=5;
+    rRidgeCount7=6;
+
+    wRidgeCount1=0;
+    wRidgeCount2=0;
+    wRidgeCount3=0;
+    wRidgeCount4=0;
+    wRidgeCount5=0;
+    wRidgeCount6=0;
+    wRidgeCount7=0;
+
+    //reset all ridge images
+    setRRidgeImage(rRidgeCount2, rRidge2);
+    setRRidgeImage(rRidgeCount3, rRidge3);
+    setRRidgeImage(rRidgeCount4, rRidge4);
+    setRRidgeImage(rRidgeCount5, rRidge5);
+    setRRidgeImage(rRidgeCount6, rRidge6);
+    setRRidgeImage(rRidgeCount7, rRidge7);
+
+    setWRidgeImage(wRidgeCount1, wRidge1);
+    setWRidgeImage(wRidgeCount2, wRidge2);
+    setWRidgeImage(wRidgeCount3, wRidge3);
+    setWRidgeImage(wRidgeCount4, wRidge4);
+    setWRidgeImage(wRidgeCount5, wRidge5);
+    setWRidgeImage(wRidgeCount6, wRidge6);
+    setWRidgeImage(wRidgeCount7, wRidge7);
+
+
+    p1=new ArrayList<>();
+    p1.add(c1);
+    p2=new ArrayList<>();
+    p2.add(c2);
+    p3=new ArrayList<>();
+    p3.add(c3);
+    p4=new ArrayList<>();
+    p4.add(c4);
+    p5=new ArrayList<>();
+    p5.add(c5);
+    p6=new ArrayList<>();
+    p6.add(c6);
+    p7=new ArrayList<>();
+    p7.add(c7);
+    pMove = new ArrayList<>();//TODO start here still get stopped error THIS IS GIVING ME AN ERROR WHY
+    pDiamond= new ArrayList<>();
+    pClub= new ArrayList<>();
+    pHeart= new ArrayList<>();
+    pSpade= new ArrayList<>();
+
+    imgDeckClub.setImageResource(R.drawable.blankclubs);
+    imgDeckDiamond.setImageResource(R.drawable.blankdiamonds);
+    imgDeckHeart.setImageResource(R.drawable.blankhearts);
+    imgDeckSpade.setImageResource(R.drawable.blankspades);
+  }
   //create a card- pick it randomly from the deck and remove it
   public Card createCard(ImageButton img){
     if(d1.size()==0) {
@@ -599,7 +677,7 @@ public class scrnGame extends AppCompatActivity {
       d2.emptyDeck();
     }
     Card c = d1.pickACard();
-    c = d1.removeCard(c);
+    //c = d1.removeCard(c);
     setCardImage(img, c);
     return c;
 
@@ -643,6 +721,7 @@ public class scrnGame extends AppCompatActivity {
       return p7;
     else
       return null;
+
   }
 
   //return a number that corresponds with the sent in button
@@ -681,7 +760,8 @@ public class scrnGame extends AppCompatActivity {
 
     //when click on pick then a suit card
     Card suitCard;
-    suitCard=btnToCard(b);//make sure not null
+    //suitCard=btnToCard(b);//make sure not null//TODO un comment
+    suitCard=new Card(7,"Spades");
 
     //do move deck to suit after first do pile
 
@@ -722,10 +802,10 @@ public class scrnGame extends AppCompatActivity {
         setCardImage(imgCardPlay, pick);
       }
       else
-        pick= createCard(imgCardPlay);
+        pick= createCard(imgCardPlay);//TODO i think this works besides the whole stops after a couple times
     }
     //for if trying to move an ace
-    else if(isPlayClick&&suitCard==null&&pick.getRank()==1){//dont even think i need to check if suitCard is null
+    else if(isPlayClick&&suitCard.getRank()==0&&pick.getRank()==1){//dont even think i need to check if suitCard is null
       if(b.equals(imgDeckClub)){
         pClub.add(pick);
         cClub=pick;
@@ -758,15 +838,15 @@ public class scrnGame extends AppCompatActivity {
     //if is deck click is false when click on a deck then store in a card field its card card
 
     //tod keep track of isDeckClick
-    if(!isDeckClick){
+    /*if(!isDeckClick){
       isDeckClick = true;
       deckClick=btnToCard(b);
       pMove=btnToPile(b);
       intClick=btnToInt(b); //makesure this workds
-    }
+    }*/ //TODO check I dont think I need this cuz in other method
     //make sure I double check this method
     //todo make sure I change is deckClick
-    else if(isDeckClick&&deckClick.canAddSuitStack(suitCard)&&suitCard!=null&&deckClick!=null){
+     if(isDeckClick&&deckClick.canAddSuitStack(suitCard)&&suitCard!=null&&deckClick!=null){
       if(b.equals(imgDeckClub)) {
         pClub.add(deckClick);
         cClub=deckClick;
@@ -790,9 +870,14 @@ public class scrnGame extends AppCompatActivity {
 
       //change the image of the pile
       //todo make sure change images here
+       //todo so it moves 8 to a suit pile but also leaves 8
       if(intClick==1) {
         if(wRidgeCount1>0) {
-          c1 = createCard(imgCard1);//todo check
+          c1= p1.get(1);
+          setCardImage(imgCard1,c1);
+          //c1 = createCard(imgCard1);//todo check
+          wRidgeCount1-=1;
+          setWRidgeImage(wRidgeCount1,wRidge1);
           }
         else
           c1=new Card("",0);
@@ -805,21 +890,24 @@ public class scrnGame extends AppCompatActivity {
           rRidgeCount2-=1;
           setRRidgeImage(rRidgeCount2, rRidge2);
           c2= createCard(imgCard2);
+          //p2.remove(0); TODO check if need add this
         }
         else if(checkIfBlank(wRidgeCount2,rRidgeCount2)) {
           c2=new Card("",0);
           imgCard2.setImageDrawable(null);
         }//make blank
         else if(p2.size()>1){
-          c2 = p2.get(p2.size()-2);
+          //c2 = p2.get(p2.size()-2);
           //remove one card from pile
           //remove one from white ridges
-          p2.remove(p2.size()-1);
+         // p2.remove(p2.size()-1);
+          p2.remove(0);
+          //c2=p2.get(0);//TODO why isnt this working
           wRidgeCount2-=1;
           setWRidgeImage(wRidgeCount2, wRidge2);
           setCardImage(imgCard2, c2);
         }
-
+//TODO mehhhhhh do this laterrrrrrrrrrrrrr
       }
       else if(intClick==3){
         if(p3.size()==1 &&rRidgeCount3>=1){
