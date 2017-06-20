@@ -1,8 +1,6 @@
 package com.bishopireton.solitaire;
-//package com.example.innisa.solitaireproject;
 
-
-        import android.os.Bundle;
+import android.os.Bundle;
         import android.support.v7.app.AppCompatActivity;
         import android.view.View;
         import android.widget.Button;
@@ -233,7 +231,7 @@ public class scrnGame extends AppCompatActivity {
         Card cCheck= pMove.get(0); //get card at the bottom of the pile
 
         //everything to move one pile to the other
-        if(cCheck.isBellow(btnToCard(b))){
+        if(cCheck.isBelow(btnToCard(b))){
           int intMoveTo= btnToInt(b);
           if(intMoveTo!=intClick) {
             //add to the correct piles the cards from the second pile(intClick)
@@ -353,7 +351,7 @@ public class scrnGame extends AppCompatActivity {
 
     isDeckClick=false;
     //check to see if the card works
-    if(pick.isBellow(corrWithImg)&& isPlayClick) {
+    if(pick.isBelow(corrWithImg)&& isPlayClick) {
       //if statement to see what card to change
       //change b to p's image
       if (b.equals(imgCard1)) {
